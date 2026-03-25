@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, type QueryKey } from "@tanstack/react-query";
 
 export interface UsePollingOptions<TData> {
@@ -17,7 +17,7 @@ export function usePolling<TData>(
 	const [isTabVisible, setIsTabVisible] = useState(
 		typeof document !== "undefined" ? !document.hidden : true,
 	);
-	const shouldStopRef = useRef(false);
+	const [shouldStop, setShouldStop] = useState(false);
 
 	// Handle visibility change
 	useEffect(() => {
@@ -37,13 +37,13 @@ export function usePolling<TData>(
 	const query = useQuery({
 		queryKey,
 		queryFn: fetchFn,
-		enabled: enabled && !shouldStopRef.current,
+		enabled: enabled && !shouldStop,
 		refetchInterval: (query) => {
 			const data = query.state.data;
 
 			// Check if we should stop polling based on data condition
 			if (stopWhen && data && stopWhen(data)) {
-				shouldStopRef.current = true;
+				setShouldStop(true);
 				return false;
 			}
 

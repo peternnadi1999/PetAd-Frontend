@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { Notification, NotificationType } from "../types/notifications";
+import type { Notification } from "../types/notifications";
 
 const notifications: Notification[] = [
     {
@@ -145,7 +145,7 @@ const ChevronRight = () => (
     </svg>
 );
 
-const getIcon = (type: "success" | "adoption" | "reminder") => {
+const getIcon = (type: string) => {
     if (type === "success") return <SuccessIcon />;
     if (type === "adoption") return <AdoptionIcon />;
     if (type === "reminder") return <ReminderIcon />;

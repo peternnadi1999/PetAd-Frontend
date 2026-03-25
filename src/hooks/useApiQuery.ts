@@ -1,5 +1,5 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
-import { ApiError } from "../types/auth";
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import type { ApiError } from "../types/auth";
 
 interface UseApiQueryReturn<T> {
   data: T | undefined;
@@ -33,7 +33,7 @@ export function useApiQuery<T>(
   // Handle 401 Unauthorized
   if (status === 401) {
     if (typeof window !== "undefined") {
-      window.location.href = "/login";
+      window.location.assign("/login");
     }
   }
 

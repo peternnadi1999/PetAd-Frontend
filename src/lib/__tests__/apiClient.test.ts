@@ -375,7 +375,7 @@ describe("ApiClient", () => {
 
 	describe("getApiClient singleton", () => {
 		it("getApiClient returns the same instance created by createApiClient", () => {
-			const client = freshClient();
+			freshClient();
 			const retrieved = getApiClient();
 			// Both point to the same singleton (createApiClient only creates once)
 			expect(retrieved).toBeDefined();

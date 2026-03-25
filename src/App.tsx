@@ -17,6 +17,7 @@ import ListingDetailsPage from "./pages/ListingDetailsPage";
 import ModalPreview from "./pages/ModalPreview";
 
 function App() {
+
   return (
     <Routes>
       {/* Auth Routes - No Navbar/Footer */}
@@ -44,6 +45,7 @@ function App() {
       </Route>
     </Routes>
   );
+  
 }
 
 export default App;
