@@ -2,11 +2,11 @@ import { useRealTimeStatusPolling } from "../lib/hooks/useRealTimeStatusPolling"
 
 export default function StatusPollingDemo() {
   // Test adoption polling
-  const { data: adoptionData, statusChanged: adoptionStatusChanged, isLoading: adoptionLoading } = 
+  const { data: adoptionData, statusChanged: adoptionStatusChanged, isLoading: adoptionLoading } =
     useRealTimeStatusPolling("adoption", "adoption-1", { intervalMs: 5000 });
 
   // Test custody polling
-  const { data: custodyData, statusChanged: custodyStatusChanged, isLoading: custodyLoading } = 
+  const { data: custodyData, statusChanged: custodyStatusChanged, isLoading: custodyLoading } =
     useRealTimeStatusPolling("custody", "custody-1", { intervalMs: 7000 });
 
   return (
@@ -15,16 +15,15 @@ export default function StatusPollingDemo() {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           Real-time Status Polling Demo
         </h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Adoption Status */}
-          <div className={`bg-white rounded-lg shadow-md p-6 border-2 ${
-            adoptionStatusChanged ? 'border-green-500 animate-pulse' : 'border-gray-200'
-          }`}>
+          <div className={`bg-white rounded-lg shadow-md p-6 border-2 ${adoptionStatusChanged ? 'border-green-500 animate-pulse' : 'border-gray-200'
+            }`}>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Adoption Status
             </h2>
-            
+
             {adoptionLoading ? (
               <div className="text-gray-500">Loading adoption status...</div>
             ) : adoptionData ? (
@@ -35,12 +34,11 @@ export default function StatusPollingDemo() {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-medium">Status:</span>
-                  <span className={`px-2 py-1 rounded text-sm font-medium ${
-                    adoptionData.status === 'ESCROW_FUNDED' ? 'bg-blue-100 text-blue-800' :
-                    adoptionData.status === 'COMPLETED' ? 'bg-green-100 text-green-800' :
-                    adoptionData.status === 'CANCELLED' ? 'bg-red-100 text-red-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span className={`px-2 py-1 rounded text-sm font-medium ${adoptionData.status === 'ESCROW_FUNDED' ? 'bg-blue-100 text-blue-800' :
+                      adoptionData.status === 'COMPLETED' ? 'bg-green-100 text-green-800' :
+                        adoptionData.status === 'CANCELLED' ? 'bg-red-100 text-red-800' :
+                          'bg-gray-100 text-gray-800'
+                    }`}>
                     {adoptionData.status}
                   </span>
                 </div>
@@ -50,7 +48,9 @@ export default function StatusPollingDemo() {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-medium">Adopter ID:</span>
-                  <span className="text-gray-600">{adoptionData.adopterId}</span>
+                  <span className="text-gray-600">
+                    {'adopterId' in adoptionData ? adoptionData.adopterId : 'N/A'}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-medium">Updated:</span>
@@ -70,13 +70,12 @@ export default function StatusPollingDemo() {
           </div>
 
           {/* Custody Status */}
-          <div className={`bg-white rounded-lg shadow-md p-6 border-2 ${
-            custodyStatusChanged ? 'border-blue-500 animate-pulse' : 'border-gray-200'
-          }`}>
+          <div className={`bg-white rounded-lg shadow-md p-6 border-2 ${custodyStatusChanged ? 'border-blue-500 animate-pulse' : 'border-gray-200'
+            }`}>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Custody Status
             </h2>
-            
+
             {custodyLoading ? (
               <div className="text-gray-500">Loading custody status...</div>
             ) : custodyData ? (
@@ -87,12 +86,11 @@ export default function StatusPollingDemo() {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-medium">Status:</span>
-                  <span className={`px-2 py-1 rounded text-sm font-medium ${
-                    custodyData.status === 'CUSTODY_ACTIVE' ? 'bg-green-100 text-green-800' :
-                    custodyData.status === 'COMPLETED' ? 'bg-blue-100 text-blue-800' :
-                    custodyData.status === 'CANCELLED' ? 'bg-red-100 text-red-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span className={`px-2 py-1 rounded text-sm font-medium ${custodyData.status === 'CUSTODY_ACTIVE' ? 'bg-green-100 text-green-800' :
+                      custodyData.status === 'COMPLETED' ? 'bg-blue-100 text-blue-800' :
+                        custodyData.status === 'CANCELLED' ? 'bg-red-100 text-red-800' :
+                          'bg-gray-100 text-gray-800'
+                    }`}>
                     {custodyData.status}
                   </span>
                 </div>
