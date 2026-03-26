@@ -94,4 +94,38 @@ export const escrowHandlers = [
 			updatedAt: new Date().toISOString(),
 		});
 	}),
+
+	// GET /api/escrow/:id/settlement-summary — fetch settlement breakdown
+	http.get("/api/escrow/:id/settlement-summary", async ({ request, params }) => {
+		await delay(getDelay(request));
+		const id = params.id as string;
+
+		if (id === "not-found") {
+			return new HttpResponse(null, { status: 404 });
+		}
+
+		const summary: any = {
+			onChainStatus: "SUCCESS",
+			confirmations: 12,
+			payments: [
+				{
+					id: "pay-1",
+					amount: 20000,
+					asset: "XLM",
+					destination: "GD7...X4Y",
+					status: "SUCCESS",
+				},
+				{
+					id: "pay-2",
+					amount: 5000,
+					asset: "XLM",
+					destination: "GB2...A7Q",
+					status: "SUCCESS",
+				},
+			],
+			stellarExplorerUrl: `https://stellar.expert/explorer/testnet/tx/mock_tx_hash`,
+		};
+
+		return HttpResponse.json(summary);
+	}),
 ];
